@@ -1,0 +1,1 @@
+print('Robot health placeholder')

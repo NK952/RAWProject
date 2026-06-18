@@ -1,0 +1,1 @@
+print('Capture image placeholder')
