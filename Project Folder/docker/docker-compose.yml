@@ -1,0 +1,4 @@
+version: '3.8'
+services:
+  door_inspec:
+    image: door_inspec:latest
