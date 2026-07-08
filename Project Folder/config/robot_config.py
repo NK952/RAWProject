@@ -2,7 +2,7 @@ import os
 
 DEFAULT_HOSTNAME = os.getenv("SPOT_HOSTNAME", "192.186.80.3")
 DEFAULT_USERNAME = os.getenv("SPOT_USERNAME", "user")
-DEFAULT_PASSWORD = os.getenv("SPOT_PASSWORD", "mz9jmfhp68o7")
+DEFAULT_PASSWORD = os.getenv("SPOT_PASSWORD", "")
 
 def get_robot_config():
     return {
