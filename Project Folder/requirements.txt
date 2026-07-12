@@ -1,3 +1,7 @@
 bosdyn-client
 bosdyn-api
 bosdyn-core
+Pillow
+requests
+grpcio
+protobuf

@@ -33,4 +33,26 @@ if [[$NO_LOAD -eq 0]]; then
         docker load -i "$IMAGE_TGZ"
         fi
     else
-        echo "Docker image tarball not found at $IMAGE_TGZ. Skipping load."
+        echo "Docker image tarball not found at $IMAGE_TGZ. Skipping load." >&2
+    fi
+else
+    echo "Skipping Docker image load as per --no-load flag."
+fi
+
+export SPOT_IP="${SPOT_IP:-192.168.80.3}"
+
+if [[! -f "$COMPOSE_FILE"]]; then
+    echo "Docker Compose file not found at $COMPOSE_FILE. Exiting." >&2
+    exit 1
+fi
+
+if command -v docker-compose >/dev/null 2>&1; then
+    DC_CMD=(docker-compose -f "$COMPOSE_FILE")
+else
+    DC_CMD=(docker compose -f "$COMPOSE_FILE")
+fi
+
+echo "Starting Docker Compose services..."
+"${DC_CMD[@]}" up -d --remove-orphans
+
+echo "Docker Compose services started successfully. To view logs, run: ${DC_CMD[*]} logs -f" 

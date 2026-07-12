@@ -30,6 +30,25 @@ def get_settings() -> Settings:
         save_image_path=os.getenv("SPOT_SAVE_IMAGE_PATH", os.getenv("SPOT_SAVE_IMAGE_PATH", "./images"))
     )
 
+@dataclass(frozen=True)
+class CoreIOSettings:
+    hostname: str
+    username: str
+    password: str
+    port: int
+    timeout_seconds: int
+    verify_tls: bool
+
+def get_coreio_settings() -> CoreIOSettings:
+    return CoreIOSettings(
+        hostname=os.getenv("COREIO_HOSTNAME", os.getenv("COREIO_HOSTNAME", "192.168.80.3")),
+        username=os.getenv("COREIO_USERNAME", os.getenv("COREIO_USERNAME", "user")),
+        password=os.getenv("COREIO_PASSWORD", os.getenv("COREIO_PASSWORD", "")),
+        port=int(os.getenv("COREIO_PORT", os.getenv("COREIO_PORT", "443"))),
+        timeout_seconds=int(os.getenv("COREIO_TIMEOUT_SECONDS", os.getenv("COREIO_TIMEOUT_SECONDS", "30"))),
+        verify_tls=_get_bool("COREIO_VERIFY_TLS", True)
+    )
+
 def get_spot_config() -> dict:
     settings = get_settings()
     return {
