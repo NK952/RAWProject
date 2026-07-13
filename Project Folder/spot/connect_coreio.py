@@ -44,8 +44,8 @@ class CoreIOClient:
             timeout=self.timeout_seconds
         )
 
-        if login_response.status_code == HTTPStatus.OK:
-            logger.error('Core I/O login failed: %s', login_response.status_code, login_response.text)
+        if login_response.status_code != HTTPStatus.OK:
+            logger.error('Core I/O login failed: %s %s', login_response.status_code, login_response.text)
             self.authenticated = False
             return False
         
