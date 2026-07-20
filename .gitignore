@@ -1,0 +1,7 @@
+.env
+*.db
+logs/
+reports/
+images/
+__pycache__/
+.pytest.cache
